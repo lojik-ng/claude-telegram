@@ -7,9 +7,10 @@ const DailyRotateFile = require('winston-daily-rotate-file');
 // Read environment variables
 const token = process.env.TELEGRAM_BOT_TOKEN;
 const allowedChatId = process.env.TELEGRAM_CHAT_ID;
+const allowedGroupId = process.env.TELEGRAM_GROUP_ID;
 const defaultDirectory = process.env.DEFAULT_DIRECTORY;
 
-if (!token || !allowedChatId || !defaultDirectory) {
+if (!token || !defaultDirectory || (!allowedChatId && !allowedGroupId)) {
   console.error('Missing required environment variables. Please check your .env file.');
   process.exit(1);
 }
@@ -40,22 +41,27 @@ const logger = winston.createLogger({
 // Create Telegram Bot
 const bot = new TelegramBot(token, { polling: true });
 
-logger.info(`Bot started. Listening for messages from chat ID: ${allowedChatId}`);
+logger.info(`Bot started. Listening for messages from chat ID: ${allowedChatId || 'none'} and group ID: ${allowedGroupId || 'none'}`);
 
-// Send startup notification to the configured Telegram ID
-bot.sendMessage(allowedChatId, '🤖 Claude Telegram Bot is now online!');
+// Send startup notification to the configured Telegram IDs
+if (allowedChatId) bot.sendMessage(allowedChatId, '🤖 Claude Telegram Bot is now online!');
+if (allowedGroupId) bot.sendMessage(allowedGroupId, '🤖 Claude Telegram Bot is now online!');
 
 bot.on('message', (msg) => {
   const chatId = msg.chat.id.toString();
+  const userId = msg.from && msg.from.id.toString();
   const text = msg.text;
 
   if (!text) return;
 
   // Log all communication
-  logger.info(`Received message from Telegram ID ${chatId}: ${text}`);
+  logger.info(`Received message from User ID ${userId} in Chat ID ${chatId}: ${text}`);
 
-  if (chatId !== allowedChatId) {
-    logger.warn(`Unauthorized access attempt from Telegram ID: ${chatId}. Message ignored.`);
+  const isAuthorizedUser = userId === allowedChatId;
+  const isAuthorizedChat = chatId === allowedGroupId;
+
+  if (!isAuthorizedUser || !isAuthorizedChat) {
+    logger.warn(`Unauthorized access attempt from User ID: ${userId} in Chat ID: ${chatId}. Message ignored.`);
     return; // Ignore unauthorized messages
   }
 
