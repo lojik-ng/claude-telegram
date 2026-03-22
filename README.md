@@ -3,6 +3,7 @@
 A lightweight, secure Node.js service that acts as a bridge between a specific Telegram chat and the Anthropic Claude CLI tool. This allows you to securely send prompts to Claude from anywhere via Telegram, using your machine's local `claude-code` CLI.
 
 ## Features
+
 - **Secure by Default:** Only accepts messages from a specific authorized Telegram Chat ID or Group ID. It actively logs and ignores commands from unauthorized IDs.
 - **Background Execution:** Transparently bridges your Telegram texts to Claude's CLI, passing inputs and capturing responses.
 - **Robust Daily Logging:** Uses `winston` and `winston-daily-rotate-file` to keep highly organized daily log files (14-day history). Logs contain all communication, including access attempts from unauthorized users.
@@ -12,7 +13,7 @@ A lightweight, secure Node.js service that acts as a bridge between a specific T
 
 1. **Node.js**
 2. **Claude Code CLI** globally installed (`npm install -g @anthropic-ai/claude-code`) AND authenticated on your local machine.
-3. A **Telegram Bot Token**. 
+3. A **Telegram Bot Token**.
    - Open Telegram and search for [@BotFather](https://t.me/botfather).
    - Send `/newbot` and follow the prompts to create your bot and set a name and username.
    - Once created, BotFather will give you an HTTP API token (e.g., `123456789:ABCdefGHIjkl...`). Save this securely.
@@ -22,7 +23,7 @@ A lightweight, secure Node.js service that acts as a bridge between a specific T
 
 1. Clone this project:
    ```bash
-   git clone https://github.com/lojik/claude-telegram.git
+   git clone https://github.com/lojik-ng/claude-telegram.git
    cd claude-telegram
    ```
 2. Install the necessary project dependencies:
@@ -42,14 +43,16 @@ A lightweight, secure Node.js service that acts as a bridge between a specific T
 ## Usage
 
 Simply start the bridge application:
+
 ```bash
 npm start
 ```
 
-Then, send a message to your newly made Telegram bot! 
+Then, send a message to your newly made Telegram bot!
+
 - You will receive a real-time acknowledgment: `processing...`
 - The bot triggers a command in the background running the Claude CLI in your specified directory.
-- The entire output from Claude is captured and formatted directly back to you in your Telegram chat. 
+- The entire output from Claude is captured and formatted directly back to you in your Telegram chat.
 
 ## Logging
 
