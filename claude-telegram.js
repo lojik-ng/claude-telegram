@@ -60,7 +60,7 @@ bot.on('message', (msg) => {
   }
 
   // Acknowledge receipt to the user so they know it's processing
-  bot.sendMessage(chatId, `Processing your request with Claude...`);
+  bot.sendMessage(chatId, `processing...`);
 
   // Escape single quotes and proper escaping for CLI
   // We'll use JSON.stringify to safely escape the incoming text string for bash execution
