@@ -12,12 +12,19 @@ A lightweight, secure Node.js service that acts as a bridge between a specific T
 
 1. **Node.js**
 2. **Claude Code CLI** globally installed (`npm install -g @anthropic-ai/claude-code`) AND authenticated on your local machine.
-3. A **Telegram Bot Token**. (Talk to [@BotFather](https://t.me/botfather) on Telegram to create a new bot and get its HTTP API token).
+3. A **Telegram Bot Token**. 
+   - Open Telegram and search for [@BotFather](https://t.me/botfather).
+   - Send `/newbot` and follow the prompts to create your bot and set a name and username.
+   - Once created, BotFather will give you an HTTP API token (e.g., `123456789:ABCdefGHIjkl...`). Save this securely.
 4. Your **Telegram Chat ID** and/or **Telegram Group ID**. (You can message a bot like `@userinfobot` to retrieve your numeric ID, or add a bot to a group to get the group ID).
 
 ## Setup & Installation
 
-1. Clone or download this project.
+1. Clone this project:
+   ```bash
+   git clone https://github.com/lojik/claude-telegram.git
+   cd claude-telegram
+   ```
 2. Install the necessary project dependencies:
    ```bash
    npm install
