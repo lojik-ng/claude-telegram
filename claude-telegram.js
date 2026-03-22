@@ -58,7 +58,7 @@ bot.on('message', (msg) => {
   logger.info(`Received message from User ID ${userId} in Chat ID ${chatId}: ${text}`);
 
   const isAuthorizedUser = userId === allowedChatId;
-  const isAuthorizedChat = chatId === allowedGroupId;
+  const isAuthorizedChat = chatId === allowedChatId || chatId === allowedGroupId;
 
   if (!isAuthorizedUser || !isAuthorizedChat) {
     logger.warn(`Unauthorized access attempt from User ID: ${userId} in Chat ID: ${chatId}. Message ignored.`);
