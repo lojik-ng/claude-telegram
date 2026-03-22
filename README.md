@@ -40,7 +40,7 @@ npm start
 ```
 
 Then, send a message to your newly made Telegram bot! 
-- You will receive a real-time acknowledgment: `Processing your request with Claude...`
+- You will receive a real-time acknowledgment: `processing...`
 - The bot triggers a command in the background running the Claude CLI in your specified directory.
 - The entire output from Claude is captured and formatted directly back to you in your Telegram chat. 
 
