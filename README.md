@@ -57,3 +57,22 @@ Then, send a message to your newly made Telegram bot!
 ## Logging
 
 Check the automatically generated `./logs` directory for rotated activity logs. New files are generated per day and old logs are completely rotated out after 14 days.
+
+## Running as a Cron Job (Linux)
+
+You can use the provided `start.sh` script to ensure the application automatically starts and stays running in the background. The script checks if the process is already active, and starts it if it isn't.
+
+1. Make the start script executable:
+   ```bash
+   chmod +x start.sh
+   ```
+
+2. Open your crontab editor:
+   ```bash
+   crontab -e
+   ```
+
+3. Add the following line to run the check every minute (ensure the path matches where you cloned the repository):
+   ```cron
+   * * * * * /home/lojik/Documents/GitHub/claude-telegram/start.sh >> /home/lojik/Documents/GitHub/claude-telegram/cron.log 2>&1
+   ```
